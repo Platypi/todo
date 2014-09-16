@@ -1,1 +1,8 @@
-<h1>{{title}}</h1>
+<div class="todo-input">
+    <input type="text" plat-bind="newTodo">
+    <button plat-tap="createTodo(newTodo)" class="create-todo">add</button>
+</div>
+<!-- Todo items go here -->
+<ul plat-control="plat-foreach" plat-context="todos">
+    <li>{{title}}</li>
+</ul>
