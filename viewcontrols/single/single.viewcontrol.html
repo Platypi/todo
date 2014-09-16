@@ -1,7 +1,12 @@
+<plat-resources>
+    <injectable alias="converters">converters</injectable>
+</plat-resources>
+<!-- ^ resources belong at the top of your templates ^ -->
 <div class="single-todo">
     <a plat-tap="goBack" class="action">
         <i class="fa fa-angle-left"></i>
     </a>
     <span class="title">{{title}}</span>
-    <span class="date">{{created}}</span>
+    <!-- the converter resources can now be used like so: -->
+    <span class="date">{{@converters.formatDate(created)}}</span>
 </div>
