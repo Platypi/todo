@@ -28,6 +28,12 @@ module todo.viewcontrols {
 		    this.todosRepository.setTodos(this.context.todos);
 		}
 
+		viewTodo(todo: models.ITodo) {
+		    this.navigator.navigate(viewcontrols.SingleViewControl, {
+		        parameter: todo
+		    });
+		}
+
 		markComplete(created: Date) {
 		    this.utils.forEach(this.context.todos, (todo: models.ITodo) => {
 		        if (todo.created === created) {
