@@ -6,18 +6,31 @@ module todo.viewcontrols {
 		    todos: []
 		};
 
-		createTodo() {
-		    var context = this.context,
-		        newTodo = {
-		        title: context.newTodo.trim(),
-		        completed: false,
-		        created: new Date()
-		    };
+		constructor(private todosRepository: repositories.TodosRepository,
+			private utils: plat.IUtils) {
+			super();
+		}
 
-		    context.todos.push(newTodo);
+		initialize() {
+		    this.todosRepository.getTodos().then((todos) => {
+		        this.context.todos = todos;
+		    });
+		}
+
+		createTodo(todo: string) {
+		    var context = this.context;
+		    context.todos.push(this.todosRepository.addTodo(todo.trim()));
+		    this.storeTodos();
 		    context.newTodo = '';
 		}
-      }
 
-      plat.register.viewControl('todo', TodoViewControl);
+		storeTodos() {
+		    this.todosRepository.setTodos(this.context.todos);
+		}
+    }
+
+	plat.register.viewControl('todo', TodoViewControl, [
+		repositories.TodosRepository,
+		plat.IUtils
+	]);
 }
