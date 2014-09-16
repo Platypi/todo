@@ -27,6 +27,21 @@ module todo.viewcontrols {
 		storeTodos() {
 		    this.todosRepository.setTodos(this.context.todos);
 		}
+
+		markComplete(created: Date) {
+		    this.utils.forEach(this.context.todos, (todo: models.ITodo) => {
+		        if (todo.created === created) {
+		            todo.completed = !todo.completed;
+		        }
+		    });
+
+		    this.storeTodos();
+		}
+
+		deleteTodo(index: number) {
+		    this.context.todos.splice(index, 1);
+		    this.storeTodos();
+		}
     }
 
 	plat.register.viewControl('todo', TodoViewControl, [

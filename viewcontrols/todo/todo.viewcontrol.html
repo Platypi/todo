@@ -3,6 +3,8 @@
     <button plat-tap="createTodo(newTodo)" class="create-todo">add</button>
 </div>
 <!-- Todo items go here -->
-<ul plat-control="plat-foreach" plat-context="todos">
-    <li>{{title}}</li>
+<ul plat-control="plat-foreach" plat-context="todos" class="todo-list">
+    <li class="{{ completed ? 'completed' : '' }}">    
+        <todo-item></todo-item>
+    </li>
 </ul>
